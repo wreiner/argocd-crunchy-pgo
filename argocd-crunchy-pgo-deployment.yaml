@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pgo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/wreiner/argocd-crunchy-pgo.git
+    targetRevision: HEAD
+    path: pgo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: pgo
+  syncPolicy:
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
